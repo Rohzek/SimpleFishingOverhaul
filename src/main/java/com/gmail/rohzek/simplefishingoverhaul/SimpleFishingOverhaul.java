@@ -3,8 +3,10 @@ package com.gmail.rohzek.simplefishingoverhaul;
 import org.slf4j.Logger;
 
 import com.gmail.rohzek.simplefishingoverhaul.lib.Reference;
+import com.gmail.rohzek.simplefishingoverhaul.tools.SimpleFishingTools;
 import com.mojang.logging.LogUtils;
 
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -44,6 +46,7 @@ public class SimpleFishingOverhaul
         //BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         //ITEMS.register(modEventBus);
+        SimpleFishingTools.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -61,8 +64,10 @@ public class SimpleFishingOverhaul
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
-       // if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS)
-           // event.accept(EXAMPLE_BLOCK_ITEM);
+       if (event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) 
+       {
+    	   event.accept(SimpleFishingTools.SIMPLE_FISHING_ROD);
+       }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
